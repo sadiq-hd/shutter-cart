@@ -1,0 +1,65 @@
+<div class="container mt-5">
+    <div class="border p-3">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <form [formGroup]="registrationForm" (ngSubmit)="proceedregister()">
+            <div class="form-group mb-3">
+              <label>
+                <input type="radio" formControlName="role" value="customer"> {{ 'CUSTOMER' | translate }}
+              </label>
+              <label>
+                <input type="radio" formControlName="role" value="seller"> {{ 'SELLER' | translate }}
+              </label>
+            </div>
+            <div class="form-group mb-3">
+              <label for="email">{{ 'EMAIL' | translate }}</label>
+              <input type="email" formControlName="email" id="email" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+              <label for="id">{{ 'NAME' | translate }}:</label>
+              <input type="text" class="form-control" id="id" formControlName="id" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">{{ 'PASSWORD' | translate }}</label>
+              <input type="password" formControlName="password" id="password" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+              <label for="gender">{{ 'GENDER' | translate }}</label>
+              <select formControlName="gender" id="gender" class="form-control">
+                <option value="male">{{ 'MALE' | translate }}</option>
+                <option value="female">{{ 'FEMALE' | translate }}</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="phone">{{ 'PHONE' | translate }}</label>
+              <input type="tel" formControlName="phone" id="phone" class="form-control">
+            </div>
+            <div class="form-group mb-3">
+              <label for="address">{{ 'ADDRESS' | translate }}</label>
+              <select formControlName="address" id="address" class="form-control">
+                <option value="المملكة العربية السعودية">{{ 'SAUDI_ARABIA' | translate }}</option>
+                <option value="البحرين">{{ 'BAHRAIN' | translate }}</option>
+                <option value="الإمارات العربية المتحدة">{{ 'UAE' | translate }}</option>
+                <option value="قطر">{{ 'QATAR' | translate }}</option>
+                <option value="سلطنة عمان">{{ 'OMAN' | translate }}</option>
+                <option value="دولة الكويت">{{ 'KUWAIT' | translate }}</option>
+                <!-- ... المزيد من الخيارات -->
+              </select>
+            </div>
+            <!-- حقول البائع -->
+            <div *ngIf="registrationForm.get('role')?.value === 'seller'">
+              <div class="form-group mb-3">
+                <label for="storeName">{{ 'STORE_NAME' | translate }}</label>
+                <input type="text" formControlName="storeName" id="storeName" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                <label for="storeDescription">{{ 'STORE_DESCRIPTION' | translate }}</label>
+                <textarea formControlName="storeDescription" id="storeDescription" class="form-control"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ 'REGISTER' | translate }}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <h1 class="text-center">قائمة المنتجات المرسلة للموافقة</h1>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>اسم المنتج</th>
+            <th>وصف المنتج</th>
+            <th>سعر المنتج</th>
+            <th>الكمية المتوفرة</th>
+            <th>فئة المنتج</th>
+            <th>صورة المنتج</th>
+            <th>الموافقة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- استخدام ngFor داخل وسم <tr> -->
+          <tr *ngFor="let product of productsForApproval">
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.category }}</td>
+            <td><img [src]="product.image" style="max-width: 100px; max-height: 100px;"></td>
+            <td>
+              <button class="btn btn-success" (click)="approveProduct(product.id)">قبول</button>
+              <button class="btn btn-danger" (click)="rejectProduct(product.id)">رفض</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

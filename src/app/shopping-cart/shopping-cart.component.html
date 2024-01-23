@@ -1,0 +1,47 @@
+<!-- shopping-cart.component.html -->
+<div class="container">
+  <h2>{{ 'cart.yourShoppingCart' | translate }}</h2>
+  <div class="row">
+    <div class="col-lg-8">
+      <div *ngFor="let item of shoppingCartItems; let i = index" class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="{{ item.image }}" alt="{{ item.name }}" class="card-img">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text">{{ 'cart.price' | translate }}: {{ item.price | currency:'SAR':'symbol':'1.2-2' }}</p>
+              <p class="card-text">{{ 'cart.stock' | translate:{ stock: item.stock } }}</p>
+              <!-- زر لإزالة المنتج من العربة واستدعاء removeFromCart عند النقر -->
+              <button class="btn btn-danger" (click)="removeFromCart(i)">{{ 'cart.removeFromCart' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <!-- تفاصيل الفاتورة وزر الشراء -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ 'cart.orderSummary' | translate }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <p *ngFor="let item of shoppingCartItems; let i = index">
+                {{ 'cart.subtotalFor' | translate:{ name: item.name, subtotal: calculateSubtotal(item) | currency:'SAR':'symbol':'1.2-2' } }}
+              </p>
+            </li>
+            <li class="list-group-item">
+              {{ 'cart.shipping' | translate }}
+            </li>
+            <li class="list-group-item">
+              {{ 'cart.total' | translate }}: {{ calculateTotal() | currency:'SAR':'symbol':'1.2-2' }}
+            </li>
+          </ul>
+          <button class="btn btn-primary btn-block" (click)="navigateToPayment()">{{ 'cart.proceedToCheckout' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

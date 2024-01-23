@@ -1,0 +1,60 @@
+<!-- <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>{{ 'myAccount.accountDetails' | translate }}</h3>
+            <form>
+                <div class="form-group">
+                    <label for="username">{{ 'myAccount.username' | translate }}</label>
+                    <input type="text" class="form-control" id="username" [value]="user.username" >
+                    <button class="btn btn-secondary" (click)="editUsername()">{{ 'Edit' | translate }}</button>
+                </div>
+                <div class="form-group">
+                    <label for="email">{{ 'myAccount.email' | translate }}</label>
+                    <input type="email" class="form-control" id="email" [value]="user.email" >
+                    <button class="btn btn-secondary" (click)="editEmail()">{{ 'Edit' | translate }}</button>
+                </div>
+                <div class="form-group">
+                    <label for="address">{{ 'myAccount.address' | translate }}</label>
+                    <input type="text" class="form-control" id="address" [value]="user.address" >
+                    <button class="btn btn-secondary" (click)="editAddress()">{{ 'Edit' | translate }}</button>
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">{{ 'myAccount.changePassword' | translate }}</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for changing password -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">{{ 'myAccount.changePassword' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Password change form -->
+                <form>
+                    <div class="form-group">
+                        <label for="currentPassword">{{ 'myAccount.currentPassword' | translate }}</label>
+                        <input type="password" class="form-control" id="currentPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">{{ 'myAccount.newPassword' | translate }}</label>
+                        <input type="password" class="form-control" id="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword">{{ 'myAccount.confirmNewPassword' | translate }}</label>
+                        <input type="password" class="form-control" id="confirmNewPassword">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Cancel' | translate }}</button>
+                <button type="button" class="btn btn-primary" (click)="changePassword()">{{ 'Save' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div> -->

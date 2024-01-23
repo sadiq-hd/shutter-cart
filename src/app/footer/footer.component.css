@@ -1,0 +1,30 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Use viewport height to ensure the footer is at the bottom of the screen */
+    margin: 0;
+  }
+  
+  .content {
+    min-height: calc(100vh - 60px); /* يجب طرح ارتفاع التذييل من ارتفاع النافذة */
+  }
+  
+  
+  .footer {
+    width: 100%;
+    height: 60px; /* Adjust based on your footer's height */
+    background-color: #333; /* Footer background color */
+    color: white;
+    text-align: center;
+    line-height: 60px; /* Center text vertically */
+  }
+  

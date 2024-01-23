@@ -1,0 +1,29 @@
+<!-- employee-registration.component.html -->
+<div class="container mt-5">
+    <h2>تسجيل موظف</h2>
+    <form [formGroup]="employeeRegistrationForm" (submit)="onSubmit()">
+        <div class="form-group">
+            <label for="employeeId">اسم الموظف</label>
+            <input type="text" class="form-control" id="employeeId" formControlName="id">
+          </div>
+      <div class="form-group">
+        <label for="employeeEmail">البريد الإلكتروني</label>
+        <input type="email" class="form-control" id="employeeEmail" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="employeePassword">كلمة المرور</label>
+        <input type="password" class="form-control" id="employeePassword" formControlName="password">
+      </div>
+      <div class="form-group">
+        <label for="employeeRole">دور الموظف</label>
+        <select class="form-control" id="employeeRole" formControlName="role">
+          <option value="employee">موظف</option>
+          <option value="manager">مدير</option>
+          <!-- يمكنك إضافة المزيد من الخيارات هنا -->
+        </select>
+      </div>
+      <!-- يمكنك إضافة المزيد من الحقول حسب احتياجات التسجيل -->
+      <button type="submit" class="btn btn-primary">سجّل الموظف</button>
+    </form>
+  </div>
+  

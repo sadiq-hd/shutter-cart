@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.name }}</h2>
+      <p class="product-description">{{ product.description }}</p>
+      <p class="product-price">{{ 'navbar.price' | translate }}: {{ product.price | currency:'SAR':'symbol':'1.2-2' }}</p>
+      <p class="product-stock">{{ 'product.stock' | translate:{ stock: product.stock } }}</p>
+      <button class="btn btn-primary" (click)="addToCart(product)">{{ 'product.addToCart' | translate }}</button>
+    </div>
+  </div>
+</div>

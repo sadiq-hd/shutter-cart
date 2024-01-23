@@ -1,0 +1,153 @@
+<div class="container mt-3">
+  <!-- شريط التقدم -->
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" [style.width]="(currentStep / totalSteps) * 100 + '%'" [attr.aria-valuenow]="currentStep" aria-valuemin="0" aria-valuemax="totalSteps"></div>
+  </div>
+
+  <!-- الخطوة الأولى: تسجيل الدخول أو التسجيل كضيف -->
+  <div *ngIf="currentStep === 1">
+    <div *ngIf="!authService.isloggedin(); else loggedInTemplate">
+      <h2>مرحباً، يرجى تسجيل الدخول للمتابعة.</h2>
+      <button class="btn btn-primary" (click)="navigateTo('main-login')">تسجيل الدخول</button>
+      <button class="btn btn-secondary" (click)="navigateTo('registration')">التسجيل</button>
+      <button class="btn btn-success" (click)="showGuestForm = true">الإكمال كزائر</button>
+    </div>
+
+    <ng-template #loggedInTemplate>
+      <h2>مرحباً {{authService.getUsername()}}, استمر في عملية الدفع.</h2>
+    </ng-template>
+
+    <!-- نموذج تسجيل الضيف -->
+    <div *ngIf="showGuestForm">
+      <form [formGroup]="guestForm" (ngSubmit)="submitGuestData()">
+        <div class="form-group">
+          <label for="username">اسم المستخدم</label>
+          <input type="text" formControlName="username" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">رقم الهاتف</label>
+          <input type="text" formControlName="phone" class="form-control" id="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="email">البريد الإلكتروني</label>
+          <input type="email" formControlName="email" class="form-control" id="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!guestForm.valid">تحقق من رقم الهاتف</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- شاشة التحقق من الكود -->
+  <div *ngIf="showVerificationInput" class="verification-overlay">
+    <div class="verification-box">
+      <input type="text" [(ngModel)]="verificationCodeEntered" class="form-control" placeholder="أدخل كود التحقق">
+      <button class="btn btn-primary" (click)="verifyCode()">تحقق</button>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    </div>
+  </div>
+  <div *ngIf="currentStep === 2">
+    <form [formGroup]="addressForm">
+
+      <div class="form-group">
+        <label for="savedAddresses">اختر عنوان محفوظ</label>
+        <select (change)="onSavedAddressChange($event)" class="form-control">
+          <option value="">اختر عنوان محفوظ</option>
+          <option *ngFor="let address of savedAddresses" [value]="address.id">
+            {{ address.region }}, {{ address.city }}
+          </option>
+        </select>
+      </div>
+          <!-- زر لإظهار الخانات لإضافة عنوان جديد -->
+          <button type="button" class="btn btn-secondary" (click)="toggleNewAddressFields()">إضافة عنوان جديد</button>
+    
+          <!-- خانات إدخال العنوان الجديد -->
+          <div *ngIf="showNewAddressFields">
+            <div class="form-group">
+              <label for="region">اختر المنطقة</label>
+              <select formControlName="region" class="form-control" (change)="onRegionChange($event)">
+                <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+              </select>
+            </div>
+            <!-- اختيار المدينة -->
+            <div class="form-group" *ngIf="selectedCities.length > 0">
+              <label for="city">اختر المدينة</label>
+              <select formControlName="city" class="form-control">
+                <option *ngFor="let city of selectedCities" [value]="city">{{ city }}</option>
+              </select>
+            </div>
+                 
+            <div class="form-group">
+              <label for="streetName">اسم الشارع</label>
+              <input type="text" formControlName="streetName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="neighborhood">اسم الحي</label>
+              <input type="text" formControlName="neighborhood" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="houseNumber">رقم البيت</label>
+              <input type="text" formControlName="houseNumber" class="form-control" required>
+            </div>
+          </div>
+    
+          <!-- زر لإرسال العنوان الجديد -->
+          <button type="button" class="btn btn-primary" (click)="submitAddress()" [disabled]="!addressForm.valid">إرسال العنوان</button>
+        </form>
+      </div>
+      <div *ngIf="currentStep === 3">
+        <div class="payment-methods">
+          <button class="btn btn-primary" (click)="selectBankTransfer()">التحويل البنكي</button>
+          <!-- ... (other payment method buttons) -->
+        
+          <!-- Display bank details for bank transfer -->
+          <div *ngIf="showBankDetails" class="bank-details">
+            <h3>تفاصيل الحساب البنكي للتحويل:</h3>
+            <p>اسم البنك: {{ bankAccountDetails.bankName }}</p>
+            <p>رقم الحساب: {{ bankAccountDetails.accountNumber }}</p>
+            <p>اسم صاحب الحساب: {{ bankAccountDetails.accountHolder }}</p>
+          </div>
+        </div>         
+         <button type="button" class="btn btn-large btn-block btn-warning" (click)="selectPaymentMethod('cashOnDelivery')">الدفع عند الاستلام</button>
+        </div>
+        <button *ngIf="showConfirmButton" class="btn btn-primary" (click)="confirmOrder()">تأكيد الطلب</button>
+
+      </div>
+      <div *ngIf="currentStep === 4" class="text-center">
+        <h2>تأكيد الطلب</h2>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="mb-4">
+                  <h3>رقم الطلب: {{ orderNumber }}</h3>
+                  <h3>الإجمالي: {{ totalAmount }}</h3>
+                  <h3>طريقة الدفع: {{ paymentMethod }}</h3>
+                  <h3>عنوان الشحن: {{ shippingAddress }}</h3>
+                </div>
+    
+                <h3>المنتجات</h3>
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let item of shoppingCartService.getShoppingCartItems()">
+                    {{ item.name }} - {{ item.price }} - الكمية: {{ item.quantity }}
+                  </li>
+                </ul>
+    
+                <button class="btn btn-success mt-4" (click)="Finish()">انهاء</button>
+                <button class="btn btn-primary mt-4" (click)="printInvoice()">طباعة الفاتورة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- أزرار التنقل -->
+      <div class="fixed-bottom p-3 bg-light">
+        <div class="container">
+          <div class="row justify-content-between">
+            <button class="btn btn-primary" (click)="previousStep()">السابق</button>
+            <button class="btn btn-success" *ngIf="currentStep !== 4" (click)="nextStep()" [disabled]="currentStep === 1 && !isPhoneVerified">التالي</button>
+          </div>
+        </div>
+      </div>
+    

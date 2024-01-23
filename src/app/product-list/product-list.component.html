@@ -1,0 +1,63 @@
+<div class="container">
+    <h2>قائمة المنتجات</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>الصورة</th>
+          <th>الاسم</th>
+          <th>الوصف</th>
+          <th>السعر</th>
+          <th>الكمية المتوفرة</th>
+          <th>النوع</th>
+          <th>تعديل</th>
+          <th>تغيير الصورة</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td><img [src]="product.image" alt="{{ product.name }}" style="width: 50px;"></td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td><input type="number" [(ngModel)]="product.price"></td>
+          <td><input type="number" [(ngModel)]="product.stock"></td>
+          <td>
+            <select [(ngModel)]="product.category">
+                        
+                <!-- تصنيفات الكاميرات -->
+                <optgroup label="كاميرات">
+                    <option value="dslr-cameras">كاميرات DSLR</option>
+                    <option value="mirrorless-cameras">كاميرات بدون مرآة</option>
+                </optgroup>
+                <!-- تصنيفات العدسات -->
+                <optgroup label="عدسات">
+                    <option value="zoom-lenses">عدسات زووم</option>
+                    <option value="prime-lenses">عدسات ثابتة</option>
+                </optgroup>
+                <!-- تصنيفات الإكسسوارات -->
+                <optgroup label="إكسسوارات">
+                    <option value="bags">حقائب</option>
+                    <option value="batteries">بطاريات</option>
+                </optgroup>
+                <!-- تصنيفات معدات الاستوديو -->
+                <optgroup label="معدات الاستوديو">
+                    <option value="lighting">إضاءة</option>
+                    <option value="backdrops">خلفيات</option>
+                </optgroup>
+            
+                <!-- ... المزيد من الخيارات -->
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="onEditProduct(product)">حفظ</button>
+          </td>
+          <td>
+            <button class="btn btn-success" (click)="onChangeImage(product)">تغيير الصورة</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteProduct(product)">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

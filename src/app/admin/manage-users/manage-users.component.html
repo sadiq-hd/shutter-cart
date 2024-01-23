@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <h2 class="mb-4">User Listing</h2>
+  
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of dataSource">
+               
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <span *ngIf="user.isactive; else inactive">Active</span>
+                    <ng-template #inactive>
+                        <span>Inactive</span>
+                    </ng-template>
+                </td>
+                <td>
+                    <select [(ngModel)]="user.role" (ngModelChange)="changeUserRole(user, $event)" class="form-control">
+                        <option value="">Un Assigned</option>
+                        <option value="admin">Admin</option>
+                        <option value="users">User</option>
+                        <option value="ExternalSeller">ExternalSeller</option>
+                        <option value="employee">employee</option>
+
+                        <!-- إضافة الأدوار الأخرى هنا -->
+                    </select>
+                </td>
+                <td>
+                   <!-- زر التفعيل سيظهر فقط إذا كان المستخدم غير نشط -->
+                  <button *ngIf="!user.isactive" (click)="activateUser(user)" class="btn btn-success">Activate</button>
+    
+                   <!-- زر إلغاء التفعيل سيظهر فقط إذا كان المستخدم نشط -->
+                 <button *ngIf="user.isactive" (click)="deactivateUser(user)" class="btn btn-warning">Deactivate</button>
+                    <button (click)="updateuser(user.id)" class="btn btn-primary ml-2">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

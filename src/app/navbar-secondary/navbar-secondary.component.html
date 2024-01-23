@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-nav">
+      <!-- Dropdown for Cameras -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navCamerasDropdown" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false"
+           (click)="toggleDropdown('cameras')">
+          {{ 'CAMERAS' | translate }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navCamerasDropdown" [class.show]="dropdowns['cameras']">
+          <li><a class="dropdown-item" (click)="navigateTo('dslr-cameras')">{{ 'DSLRCAMERAS' | translate }}</a></li>
+          <li><a class="dropdown-item" (click)="navigateTo('mirrorless-cameras')">{{ 'MIRRORLESSCAMERAS' | translate }}</a></li>
+        </ul>
+      </li>
+
+      <!-- Dropdown for Lenses -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navLensesDropdown" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false"
+           (click)="toggleDropdown('lenses')">
+          {{ 'LENSES' | translate }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navLensesDropdown" [class.show]="dropdowns['lenses']">
+          <li><a class="dropdown-item" (click)="navigateTo('zoom-lenses')">{{ 'ZOOMLENSES' | translate }}</a></li>
+          <li><a class="dropdown-item" (click)="navigateTo('prime-lenses')">{{ 'PRIMELENSES' | translate }}</a></li>
+        </ul>
+      </li>
+
+      <!-- Dropdown for Accessories -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navAccessoriesDropdown" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false"
+           (click)="toggleDropdown('accessories')">
+          {{ 'ACCESSORIES' | translate }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navAccessoriesDropdown" [class.show]="dropdowns['accessories']">
+          <li><a class="dropdown-item" (click)="navigateTo('bags')">{{ 'BAGS' | translate }}</a></li>
+          <li><a class="dropdown-item" (click)="navigateTo('batteries')">{{ 'BATTERIES' | translate }}</a></li>
+        </ul>
+      </li>
+
+      <!-- Dropdown for Studio Equipment -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navStudioEquipmentDropdown" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false"
+           (click)="toggleDropdown('studioEquipment')">
+          {{ 'STUDIOEQUIPMENT' | translate }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navStudioEquipmentDropdown" [class.show]="dropdowns['studioEquipment']">
+          <li><a class="dropdown-item" (click)="navigateTo('lighting')">{{ 'LIGHTING' | translate }}</a></li>
+          <li><a class="dropdown-item" (click)="navigateTo('backdrops')">{{ 'BACKDROPS' | translate }}</a></li>
+        </ul>
+      </li>
+    </div>
+  </div>
+</nav>

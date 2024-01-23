@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المسؤول</title>
+    <!-- تضمين Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .thumbnail {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form [formGroup]="productForm" (submit)="onSubmit()" class="w-50 form-container">
+            <h1 class="text-center">إضافة منتج جديد</h1>
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <label for="productName">اسم المنتج</label>
+                    <input type="text" class="form-control" id="productName" formControlName="name">
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="Description">وصف المنتج</label>
+                    <textarea class="form-control" id="Description" formControlName="description"></textarea>
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="productPrice">سعر المنتج</label>
+                    <input type="number" class="form-control" id="productPrice" formControlName="price">
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="productStock">الكمية المتوفرة</label>
+                    <input type="number" class="form-control" id="productStock" formControlName="stock">
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="category">فئة المنتج</label>
+                    <select class="form-control" id="category" formControlName="category">
+                        <option value="electronics">إلكترونيات</option>
+                        <option value="clothing">ملابس</option>
+                    </select>
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                    <label for="productImage">صور المنتج:</label>
+                    <input type="file" id="productImage" multiple (change)="onImageSelected($event)">
+                </div>
+            </div>
+            <div class="d-flex flex-wrap">
+                <img *ngFor="let img of selectedImages" [src]="img" class="thumbnail mb-3">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">إرسال</button>
+        </form>
+    </div>
+
+    <!-- تضمين Bootstrap JS و jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

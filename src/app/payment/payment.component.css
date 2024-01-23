@@ -1,0 +1,17 @@
+/* payment.component.css */
+.progress-bar {
+    transition: width 0.6s ease;
+  }
+  .fixed-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .confirm-button {
+    order: 1; /* تحديد ترتيب الزر "تأكيد الطلب" */
+  }
+  
+  .next-button {
+    order: 2; /* تحديد ترتيب الزر "التالي" */
+  }
+  

@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .content {
+    flex: 1; /* This makes sure that the content expands to fill available space, pushing the footer down */
+  }
+  
+  .footer {
+    width: 100%;
+    background-color: #333; /* Footer background color, same as the navbar */
+    color: white;
+    text-align: center;
+    line-height: 60px; /* Center text vertically */
+  }
+  
